@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class playerControl : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public weaponControl weapon;
+    public string sceneName;
+    private int item = 0;
+    [SerializeField] private Text ItemText;
 
     Vector2 moveDirection;
     Vector2 mousePosition;
@@ -15,7 +20,7 @@ public class playerControl : MonoBehaviour
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             weapon.Fire();
         }
@@ -31,5 +36,17 @@ public class playerControl : MonoBehaviour
         Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimAngle;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            Destroy(collision.gameObject);
+            item++;
+            ItemText.text = "Item: " + item;
+
+            if (item < 6) { SceneManager.LoadScene(sceneName); }
+        }
     }
 }
