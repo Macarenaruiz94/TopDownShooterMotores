@@ -983,7 +983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.3, y: -22.2}
+  m_AnchoredPosition: {x: -345, y: 171}
   m_SizeDelta: {x: 85.8204, y: 14.4644}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1057668968
@@ -998,7 +998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609dff962638a7e4abb986d6634fb491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 1057668969}
 --- !u!114 &1057668969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2343,7 +2342,6 @@ MonoBehaviour:
   sceneDerrota: derrota
   maxHealth: 5
   currentHealth: 0
-  healthBar: {fileID: 0}
   ItemText: {fileID: 1154069268}
 --- !u!50 &2113202207
 Rigidbody2D:

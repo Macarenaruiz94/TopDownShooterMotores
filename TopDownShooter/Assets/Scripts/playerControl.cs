@@ -14,7 +14,7 @@ public class playerControl : MonoBehaviour
     private int item = 0;
     public int maxHealth = 5;
     public int currentHealth;
-    public HealthBar healthBar;
+    //public HealthBar healthBar;
     [SerializeField] private Text ItemText;
 
     Vector2 moveDirection;
@@ -23,7 +23,7 @@ public class playerControl : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        // healthBar.SetMaxHealth(maxHealth);
     }
     void Update()
     {
@@ -65,6 +65,7 @@ public class playerControl : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemigo"))
         {
             TakeDamage(1);
+            if (currentHealth == 0) { SceneManager.LoadScene(sceneDerrota); }
         }
     }
 
@@ -72,6 +73,6 @@ public class playerControl : MonoBehaviour
     {
         currentHealth -= damage;
 
-        healthBar.SetHealth(currentHealth);
+        // healthBar.SetHealth(currentHealth);
     }
 }
