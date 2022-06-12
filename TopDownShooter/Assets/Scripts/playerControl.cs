@@ -9,8 +9,10 @@ public class playerControl : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public weaponControl weapon;
-    public string sceneName;
+    public string sceneVictoria;
+    public string sceneDerrota;
     private int item = 0;
+    private int Health = 10;
     [SerializeField] private Text ItemText;
 
     Vector2 moveDirection;
@@ -46,7 +48,17 @@ public class playerControl : MonoBehaviour
             item++;
             ItemText.text = "Item: " + item;
 
-            if (item < 6) { SceneManager.LoadScene(sceneName); }
+            if (item > 4) { SceneManager.LoadScene(sceneVictoria); }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemigo"))
+        {
+            Health--;
+
+            if (Health < 0) { SceneManager.LoadScene(sceneDerrota); }
         }
     }
 }
