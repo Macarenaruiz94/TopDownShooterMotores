@@ -12,11 +12,19 @@ public class playerControl : MonoBehaviour
     public string sceneVictoria;
     public string sceneDerrota;
     private int item = 0;
-    private int Health = 10;
+    public int maxHealth = 5;
+    public int currentHealth;
+    public HealthBar healthBar;
     [SerializeField] private Text ItemText;
 
     Vector2 moveDirection;
     Vector2 mousePosition;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
     void Update()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
@@ -48,7 +56,7 @@ public class playerControl : MonoBehaviour
             item++;
             ItemText.text = "Item: " + item;
 
-            if (item > 4) { SceneManager.LoadScene(sceneVictoria); }
+            if (item == 5) { SceneManager.LoadScene(sceneVictoria); }
         }
     }
 
@@ -56,9 +64,14 @@ public class playerControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemigo"))
         {
-            Health--;
-
-            if (Health < 0) { SceneManager.LoadScene(sceneDerrota); }
+            TakeDamage(1);
         }
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
     }
 }
